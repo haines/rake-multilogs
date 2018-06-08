@@ -1,6 +1,13 @@
 # Rake::Multilogs
 
-Rake multitask logs can be confusing, with output from each of the concurrently-running tasks being interleaved.
+[![Docs](https://img.shields.io/badge/docs-github.io-blue.svg?style=flat-square)](https://haines.github.io/rake-multilogs/)
+[![Gem](https://img.shields.io/gem/v/rake-multilogs.svg?style=flat-square)](https://rubygems.org/gems/rake-multilogs)
+[![GitHub](https://img.shields.io/badge/github-haines%2Frake--multilogs-blue.svg?style=flat-square)](https://github.com/haines/rake-multilogs)
+[![License](https://img.shields.io/github/license/haines/rake-multilogs.svg?style=flat-square)](https://github.com/haines/rake-multilogs/blob/master/LICENSE.md)
+[![Travis](https://img.shields.io/travis/haines/rake-multilogs.svg?style=flat-square)](https://travis-ci.org/haines/rake-multilogs)
+
+
+Rake [multitask](https://ruby.github.io/rake/Rake/DSL.html#method-i-multitask) logs can be confusing, with output from each of the concurrently-running tasks being interleaved.
 `Rake::Multilogs` untangles the mess by capturing each task's output and displaying it after all the tasks are finished.
 
 
@@ -24,10 +31,17 @@ Or install it yourself as:
 $ gem install rake-multilogs
 ```
 
+JRuby and Windows are not supported, because  [`Process.fork`](https://ruby-doc.org/core/Process.html#method-c-fork) is unavailable.
+`Rake::Multilogs` will gracefully fall back to the default (interleaved) output on those platforms.
+
 
 ## Usage
 
-TODO: Write usage instructions here
+Add this line to your application's Rakefile:
+
+```ruby
+require "rake/multilogs"
+```
 
 
 ## Development
