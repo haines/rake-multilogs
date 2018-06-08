@@ -8,6 +8,9 @@ AllCops:
 Metrics/LineLength:
   Enabled: false
 
+Metrics/MethodLength:
+  Enabled: false
+
 Style/BlockDelimiters:
   EnforcedStyle: semantic
 

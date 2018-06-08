@@ -3,6 +3,8 @@
 Rake multitask logs can be confusing, with output from each of the concurrently-running tasks being interleaved.
 `Rake::Multilogs` untangles the mess by capturing each task's output and displaying it after all the tasks are finished.
 
+Note that JRuby and Windows are not supported.
+
 
 ## Installation
 
@@ -27,7 +29,11 @@ $ gem install rake-multilogs
 
 ## Usage
 
-TODO: Write usage instructions here
+Add this line to your application's Rakefile:
+
+```ruby
+require "rake/multilogs"
+```
 
 
 ## Development
