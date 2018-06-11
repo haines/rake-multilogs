@@ -1,0 +1,5 @@
+--markup markdown
+--no-private
+--plugin relative_markdown_links
+-
+*.md
