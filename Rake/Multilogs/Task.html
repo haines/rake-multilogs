@@ -177,17 +177,25 @@ and displaying it when all tasks have completed.</p>
 14
 15
 16
-17</pre>
+17
+18
+19
+20
+21</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/rake/multilogs/task.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_invoke_prerequisites_concurrently'>invoke_prerequisites_concurrently</span><span class='lparen'>(</span><span class='id identifier rubyid_task_args'>task_args</span><span class='comma'>,</span> <span class='id identifier rubyid_invocation_chain'>invocation_chain</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Multilogs.html" title="Rake::Multilogs (module)">Multilogs</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call_before_fork'>call_before_fork</span> <span class='kw'>self</span>
+
   <span class='const'>Forks</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
     <span class='label'>tasks:</span> <span class='id identifier rubyid_prerequisite_tasks'>prerequisite_tasks</span><span class='comma'>,</span>
     <span class='label'>args:</span> <span class='id identifier rubyid_task_args'>task_args</span><span class='comma'>,</span>
     <span class='label'>invocation_chain:</span> <span class='id identifier rubyid_invocation_chain'>invocation_chain</span>
   <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_invoke'>invoke</span>
+
+  <span class='const'><span class='object_link'><a href="../Multilogs.html" title="Rake::Multilogs (module)">Multilogs</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call_after_fork'>call_after_fork</span> <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -199,7 +207,7 @@ and displaying it when all tasks have completed.</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Jun 11 11:28:29 2018 by
+  Generated on Tue Jun 12 17:02:54 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.14 (ruby-2.5.1).
 </div>
