@@ -43,6 +43,23 @@ Add this line to your application's Rakefile:
 require "rake/multilogs"
 ```
 
+Your multitasks will now run concurrently in forked processes, with each task's output displayed after all tasks have completed.
+
+The use of forking rather than the default threading implementation means that database connections and other resources need to be handled carefully.
+You need to make sure each forked process has its own connection by using the `before_fork` and `after_fork` hooks.
+
+For example, with Active Record, you can put the following config in your Rakefile:
+
+```ruby
+Rake::Multilogs.before_fork do
+  ActiveRecord::Base.connection.disconnect!
+end
+
+Rake::Multilogs.after_fork do
+  ActiveRecord::Base.establish_connection
+end
+```
+
 
 ## Development
 

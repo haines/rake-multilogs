@@ -13,6 +13,7 @@ RuboCop::RakeTask.new
 
 desc "Generate documentation"
 YARD::Rake::YardocTask.new :doc
+CLEAN << ".yardoc/"
 CLOBBER << "doc/"
 
 task :default => [:doc, :rubocop, :test]
