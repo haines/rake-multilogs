@@ -9,11 +9,15 @@ module Rake
       # task and displaying it when all tasks have completed.
       # @return [void]
       def invoke_prerequisites_concurrently(task_args, invocation_chain)
+        Multilogs.call_before_fork self
+
         Forks.new(
           tasks: prerequisite_tasks,
           args: task_args,
           invocation_chain: invocation_chain
         ).invoke
+
+        Multilogs.call_after_fork self
       end
     end
   end

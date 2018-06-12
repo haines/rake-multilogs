@@ -41,6 +41,7 @@ module Rake
         end
 
         @task.application.standard_exception_handling do
+          Multilogs.call_after_fork @task
           @task.send :invoke_with_call_chain, @args, @invocation_chain
         end
       end
