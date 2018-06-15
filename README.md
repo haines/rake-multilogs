@@ -8,7 +8,7 @@
 
 
 Rake [multitask](https://ruby.github.io/rake/Rake/DSL.html#method-i-multitask) logs can be confusing, with output from each of the concurrently-running tasks being interleaved.
-`Rake::Multilogs` untangles the mess by capturing each task's output and displaying it after all the tasks are finished.
+`Rake::Multilogs` helps to untangle the mess by prefixing the logs with the name of the task that wrote each line (in glorious Technicolor).
 
 
 ## Installation
@@ -32,7 +32,7 @@ $ gem install rake-multilogs
 ```
 
 JRuby and Windows are not supported, because  [`Process.fork`](https://ruby-doc.org/core/Process.html#method-c-fork) is unavailable.
-`Rake::Multilogs` will gracefully fall back to the default (interleaved) output on those platforms.
+`Rake::Multilogs` will gracefully fall back to the default (unprefixed) output on those platforms.
 
 
 ## Usage
@@ -43,10 +43,10 @@ Add this line to your application's Rakefile:
 require "rake/multilogs"
 ```
 
-Your multitasks will now run concurrently in forked processes, with each task's output displayed after all tasks have completed.
+Your multitasks will now run concurrently in forked processes, with each line written to stdout or stderr being prefixed by the name of the task that wrote it.
 
-The use of forking rather than the default threading implementation means that database connections and other resources need to be handled carefully.
-You need to make sure each forked process has its own connection by using the `before_fork` and `after_fork` hooks.
+The use of forking (which replaces the default threaded implementation) means that database connections and other resources need to be handled carefully.
+Each forked process should have its own connection, which can be achieved by using the `before_fork` and `after_fork` hooks.
 
 For example, with Active Record, you can put the following config in your Rakefile:
 
@@ -68,7 +68,9 @@ Then, run `bin/rake test` to run the tests.
 You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bin/rake install`.
-To release a new version, update the version number in `lib/rake/multilogs/version.rb`, and then run `bin/rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [RubyGems](https://rubygems.org).
+
+To release a new version, update the version number in lib/rake/multilogs/version.rb, and then run `bin/rake release`.
+This will create a git tag for the version, push git commits and tags, and push the .gem file to [RubyGems](https://rubygems.org).
 
 
 ## Contributing

@@ -5,6 +5,9 @@ AllCops:
     - bin/rake
     - vendor/bundle/**/*
 
+Metrics/ClassLength:
+  Enabled: false
+
 Metrics/LineLength:
   Enabled: false
 

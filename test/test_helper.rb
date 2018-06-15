@@ -3,18 +3,17 @@
 require "minitest/autorun"
 require "open3"
 require "rake/multilogs"
+require_relative "assert_labelled_output"
 
 module Rake
   module Multilogs
     class Test < Minitest::Test
+      include AssertLabelledOutput
+
       def rake(rakefile)
         in_tmpdir {
           File.write "Rakefile", <<~RAKEFILE
             require "rake/multilogs"
-
-            def snooze
-              sleep rand(0.01..0.1)
-            end
 
             #{rakefile}
           RAKEFILE

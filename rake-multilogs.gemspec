@@ -13,8 +13,8 @@ Gem::Specification.new do |spec|
 
   spec.summary = "Capture log output from Rake multitasks"
   spec.description = <<~DESCRIPTION
-    Rake multitask logs can be confusing, with interleaved output from all parallel tasks.
-    Rake::Multilogs untangles the mess by capturing each task's output and displaying it after all the tasks are finished.
+    Rake multitask logs can be confusing, with output from each of the concurrently-running tasks being interleaved.
+    Rake::Multilogs helps to untangle the mess by prefixing the logs with the name of the task that wrote each line (in glorious Technicolor).
   DESCRIPTION
 
   spec.homepage = "https://github.com/haines/rake-multilogs"
@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rake", "~> 12.1"
 
   spec.add_development_dependency "bundler", "~> 1.16"
+  spec.add_development_dependency "diff-lcs", "~> 1.3"
   spec.add_development_dependency "minitest", "~> 5.11"
   spec.add_development_dependency "pry", "~> 0.11"
   spec.add_development_dependency "rubocop", "~> 0.57.1"

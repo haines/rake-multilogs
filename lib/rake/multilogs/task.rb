@@ -2,11 +2,15 @@
 
 module Rake
   module Multilogs
-    # Monkey-patches `Rake::Task` to group multitask output by task and display
-    # it when all tasks have completed.
+    # Monkey-patches `Rake::Task` to prefix multitask output lines with the
+    # name of the task that wrote the line.
     module Task
-      # Invoke all the prerequisites of a task in parallel, grouping output by
-      # task and displaying it when all tasks have completed.
+      # Invoke all the prerequisites of a task in parallel. Each line written to
+      # stdout or stderr will be prefixed with the name of the task that wrote
+      # the line.
+      #
+      # @param task_args [Rake::TaskArguments] arguments to pass to the task.
+      # @param invocation_chain [Rake::InvocationChain] chain of task invocations.
       # @return [void]
       def invoke_prerequisites_concurrently(task_args, invocation_chain)
         Multilogs.call_before_fork self
