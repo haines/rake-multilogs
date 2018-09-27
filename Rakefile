@@ -16,4 +16,10 @@ YARD::Rake::YardocTask.new :doc
 CLEAN << ".yardoc/"
 CLOBBER << "doc/"
 
+desc "Run example"
+task :example do
+  cd File.expand_path("example", __dir__), verbose: false
+  sh "bundle", "exec", "rake", verbose: false
+end
+
 task :default => [:doc, :rubocop, :test]

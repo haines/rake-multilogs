@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+require "rake/multilogs"
+
+tasks = [:one, :two, :three, :four, :five, :six]
+
+tasks.each do |name|
+  task name do
+    3.times do
+      sleep 1
+      puts "It's-a me, #{name}!"
+    end
+  end
+end
+
+multitask default: tasks
