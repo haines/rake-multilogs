@@ -137,6 +137,7 @@ module AssertLabelledOutput
 
     def to_s
       return line if label.nil?
+
       "#{label} | #{line}"
     end
 

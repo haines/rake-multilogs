@@ -27,11 +27,11 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rake", "~> 12.1"
 
-  spec.add_development_dependency "bundler", "~> 1.16"
+  spec.add_development_dependency "bundler", "~> 1.17"
   spec.add_development_dependency "diff-lcs", "~> 1.3"
   spec.add_development_dependency "minitest", "~> 5.11"
-  spec.add_development_dependency "pry", "~> 0.11"
-  spec.add_development_dependency "rubocop", "~> 0.57.1"
+  spec.add_development_dependency "pry", "~> 0.12"
+  spec.add_development_dependency "rubocop", "~> 0.74.0"
   spec.add_development_dependency "yard", "~> 0.9"
   spec.add_development_dependency "yard-relative_markdown_links", "~> 0.1"
 end
