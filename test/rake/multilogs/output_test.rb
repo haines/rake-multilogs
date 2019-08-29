@@ -5,30 +5,37 @@ require_relative "../../test_helper"
 module Rake
   module Multilogs
     class OutputTest < Test
-      def test_group_output_by_task
+      def test_labelled_output
         output, status = rake <<~RAKEFILE
-          tasks = [:one, :two]
+          tasks = [:one, :two, :three]
 
-          tasks.each do |name|
+          tasks.each_with_index do |name, index|
             task name do
-              3.times do
-                snooze
-                puts name
-              end
+              printf "Hello from %s\n", name
+              printf "Goodbye from %s\n", name
             end
           end
 
           multitask :default => tasks
         RAKEFILE
 
-        assert_equal <<~OUTPUT, output
-          one
-          one
-          one
-          two
-          two
-          two
-        OUTPUT
+        assert_labelled_output_matches(
+          {
+            "one  " => [
+              "Hello from one",
+              "Goodbye from one"
+            ],
+            "two  " => [
+              "Hello from two",
+              "Goodbye from two"
+            ],
+            "three" => [
+              "Hello from three",
+              "Goodbye from three"
+            ]
+          },
+          output
+        )
 
         assert status.success?
       end
@@ -39,10 +46,6 @@ module Rake
 
           tasks.each do |name|
             task name do
-              3.times do
-                snooze
-                puts name
-              end
               raise "\#{name} failed!"
             end
           end
@@ -50,21 +53,21 @@ module Rake
           multitask :default => tasks
         RAKEFILE
 
-        assert_match <<~OUTPUT, output
-          one
-          one
-          one
-          rake aborted!
-          one failed!
-        OUTPUT
-
-        assert_match <<~OUTPUT, output
-          two
-          two
-          two
-          rake aborted!
-          two failed!
-        OUTPUT
+        assert_labelled_output_contains(
+          {
+            "one" => [
+              "rake aborted!",
+              "one failed!",
+              "Tasks: TOP => default => one"
+            ],
+            "two" => [
+              "rake aborted!",
+              "two failed!",
+              "Tasks: TOP => default => two"
+            ]
+          },
+          output
+        )
 
         refute status.success?
       end

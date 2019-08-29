@@ -1,9 +1,12 @@
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
   Exclude:
     - bin/bundle
     - bin/rake
     - vendor/bundle/**/*
+
+Metrics/ClassLength:
+  Enabled: false
 
 Metrics/LineLength:
   Enabled: false

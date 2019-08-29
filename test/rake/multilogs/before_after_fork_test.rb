@@ -28,15 +28,24 @@ module Rake
           end
         RAKEFILE
 
-        assert_equal <<~OUTPUT, output
-          before_fork: default
-          after_fork: one
-          execute: one
-          after_fork: two
-          execute: two
-          after_fork: default
-          execute: default
-        OUTPUT
+        assert_labelled_output_matches(
+          {
+            nil => [
+              "before_fork: default",
+              "after_fork: default",
+              "execute: default"
+            ],
+            "one" => [
+              "after_fork: one",
+              "execute: one"
+            ],
+            "two" => [
+              "after_fork: two",
+              "execute: two"
+            ]
+          },
+          output
+        )
       end
     end
   end
