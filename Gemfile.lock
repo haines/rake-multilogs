@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rake-multilogs (0.2.0)
+    rake-multilogs (0.3.0)
       rake (>= 12.1, < 14.0)
 
 GEM
