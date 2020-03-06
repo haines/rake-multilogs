@@ -6,15 +6,15 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.14
+    &mdash; Documentation by YARD 0.9.24
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "README";
   relpath = '';
 </script>
@@ -60,17 +60,9 @@
       <div id="content"><div id='filecontents'>
 <h1 id="label-Rake-3A-3AMultilogs">Rake::Multilogs</h1>
 
-<p><a href="https://haines.github.io/rake-multilogs/"><img src="https://img.shields.io/badge/docs-github.io-blue.svg?style=flat-square"></a>
-<a href="https://rubygems.org/gems/rake-multilogs"><img src="https://img.shields.io/gem/v/rake-multilogs.svg?style=flat-square"></a>
-<a href="https://github.com/haines/rake-multilogs"><img src="https://img.shields.io/badge/github-haines%2Frake--multilogs-blue.svg?style=flat-square"></a>
-<a href="https://github.com/haines/rake-multilogs/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/haines/rake-multilogs.svg?style=flat-square"></a>
-<a href="https://travis-ci.org/haines/rake-multilogs"><img src="https://img.shields.io/travis/haines/rake-multilogs.svg?style=flat-square"></a></p>
+<p><a href="https://haines.github.io/rake-multilogs/"><img src="https://img.shields.io/badge/docs-github.io-blue.svg?style=flat-square"></a> <a href="https://rubygems.org/gems/rake-multilogs"><img src="https://img.shields.io/gem/v/rake-multilogs.svg?style=flat-square"></a> <a href="https://github.com/haines/rake-multilogs"><img src="https://img.shields.io/badge/github-haines%2Frake--multilogs-blue.svg?style=flat-square"></a> <a href="https://github.com/haines/rake-multilogs/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/haines/rake-multilogs.svg?style=flat-square"></a> <a href="https://travis-ci.org/haines/rake-multilogs"><img src="https://img.shields.io/travis/haines/rake-multilogs.svg?style=flat-square"></a></p>
 
-<p>Rake <a href="https://ruby.github.io/rake/Rake/DSL.html#method-i-multitask">multitask</a>
-logs can be confusing, with output from each of the concurrently-running
-tasks being interleaved. <code>Rake::Multilogs</code> untangles the mess by
-capturing each task's output and displaying it after all the tasks are
-finished.</p>
+<p>Rake <a href="https://ruby.github.io/rake/Rake/DSL.html#method-i-multitask">multitask</a> logs can be confusing, with output from each of the concurrently-running tasks being interleaved. <code>Rake::Multilogs</code> untangles the mess by capturing each task's output and displaying it after all the tasks are finished.</p>
 
 <h2 id="label-Installation">Installation</h2>
 
@@ -89,9 +81,7 @@ finished.</p>
 <pre class="code ruby"><code class="ruby">$ gem install rake-multilogs
 </code></pre>
 
-<p>JRuby and Windows are not supported, because <a href="https://ruby-doc.org/core/Process.html#method-c-fork">Process.fork</a>
-is unavailable. <code>Rake::Multilogs</code> will gracefully fall back to
-the default (interleaved) output on those platforms.</p>
+<p>JRuby and Windows are not supported, because <a href="https://ruby-doc.org/core/Process.html#method-c-fork">Process.fork</a> is unavailable. <code>Rake::Multilogs</code> will gracefully fall back to the default (interleaved) output on those platforms.</p>
 
 <h2 id="label-Usage">Usage</h2>
 
@@ -100,16 +90,11 @@ the default (interleaved) output on those platforms.</p>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rake/multilogs</span><span class='tstring_end'>&quot;</span></span>
 </code></pre>
 
-<p>Your multitasks will now run concurrently in forked processes, with each
-task's output displayed after all tasks have completed.</p>
+<p>Your multitasks will now run concurrently in forked processes, with each task's output displayed after all tasks have completed.</p>
 
-<p>The use of forking rather than the default threading implementation means
-that database connections and other resources need to be handled carefully.
-You need to make sure each forked process has its own connection by using
-the <code>before_fork</code> and <code>after_fork</code> hooks.</p>
+<p>The use of forking rather than the default threading implementation means that database connections and other resources need to be handled carefully. You need to make sure each forked process has its own connection by using the <code>before_fork</code> and <code>after_fork</code> hooks.</p>
 
-<p>For example, with Active Record, you can put the following config in your
-Rakefile:</p>
+<p>For example, with Active Record, you can put the following config in your Rakefile:</p>
 
 <pre class="code ruby"><code class="ruby"><span class='const'><span class='object_link'><a href="Rake.html" title="Rake (module)">Rake</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Rake/Multilogs.html" title="Rake::Multilogs (module)">Multilogs</a></span></span><span class='period'>.</span><span class='id identifier rubyid_before_fork'><span class='object_link'><a href="Rake/Multilogs.html#before_fork-class_method" title="Rake::Multilogs.before_fork (method)">before_fork</a></span></span> <span class='kw'>do</span>
   <span class='const'>ActiveRecord</span><span class='op'>::</span><span class='const'>Base</span><span class='period'>.</span><span class='id identifier rubyid_connection'>connection</span><span class='period'>.</span><span class='id identifier rubyid_disconnect!'>disconnect!</span>
@@ -122,22 +107,13 @@ Rakefile:</p>
 
 <h2 id="label-Development">Development</h2>
 
-<p>After checking out the repo, run <code>bin/setup</code> to install
-dependencies. Then, run <code>bin/rake test</code> to run the tests. You
-can also run <code>bin/console</code> for an interactive prompt that will
-allow you to experiment.</p>
+<p>After checking out the repo, run <code>bin/setup</code> to install dependencies. Then, run <code>bin/rake test</code> to run the tests. You can also run <code>bin/console</code> for an interactive prompt that will allow you to experiment.</p>
 
-<p>To install this gem onto your local machine, run <code>bin/rake
-install</code>. To release a new version, update the version number in
-<code>lib/rake/multilogs/version.rb</code>, and then run <code>bin/rake
-release</code>, which will create a git tag for the version, push git
-commits and tags, and push the <code>.gem</code> file to <a href="https://rubygems.org">RubyGems</a>.</p>
+<p>To install this gem onto your local machine, run <code>bin/rake install</code>. To release a new version, update the version number in <code>lib/rake/multilogs/version.rb</code>, and then run <code>bin/rake release</code>, which will create a git tag for the version, push git commits and tags, and push the <code>.gem</code> file to <a href="https://rubygems.org">RubyGems</a>.</p>
 
 <h2 id="label-Contributing">Contributing</h2>
 
-<p>Bug reports and pull requests are welcome <a href="https://github.com/haines/rake-multilogs">on GitHub</a>. This project
-is intended to be a safe, welcoming space for collaboration, and
-contributors are expected to adhere to the <a href="file.CODE_OF_CONDUCT.html" title="code of conduct">code of conduct</a>.</p>
+<p>Bug reports and pull requests are welcome <a href="https://github.com/haines/rake-multilogs">on GitHub</a>. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the <a href="file.CODE_OF_CONDUCT.html" title="code of conduct">code of conduct</a>.</p>
 
 <h2 id="label-License">License</h2>
 
@@ -145,9 +121,9 @@ contributors are expected to adhere to the <a href="file.CODE_OF_CONDUCT.html" t
 </div></div>
 
       <div id="footer">
-  Generated on Tue Jun 12 17:02:53 2018 by
+  Generated on Fri Mar  6 18:55:22 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.14 (ruby-2.5.1).
+  0.9.24 (ruby-2.7.0).
 </div>
 
     </div>
